@@ -1,6 +1,13 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { getFilter } from 'redux/selector';
+import { filterContacts } from 'redux/contactsSlice';
 import { Form, Label, Input } from './Filter.styled';
 
-export const Filter = ({ filter, handelChange }) => {
+export const Filter = () => {
+  const dispatch = useDispatch();
+  const filter = useSelector(getFilter);
+
+  const handelChange = evt => dispatch(filterContacts(evt.currentTarget.value));
   return (
     <Form>
       <Label for="filter">Find contacts by name</Label>
@@ -17,3 +24,5 @@ export const Filter = ({ filter, handelChange }) => {
     </Form>
   );
 };
+
+export default Filter;
